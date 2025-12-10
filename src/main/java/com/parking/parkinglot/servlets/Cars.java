@@ -20,8 +20,9 @@ public class Cars extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<CarDto> cars = carsBean.findAllCars();
         request.setAttribute("cars", cars);
-        request.setAttribute("numberOfFreeParkingSpots", "10");
-
+        
+        int numberOfFreeParkingSpots = 10 - cars.size();
+        request.setAttribute("numberOfFreeParkingSpots", numberOfFreeParkingSpots);
 
         request.getRequestDispatcher("/WEB-INF/pages/cars.jsp").forward(request, response);
     }

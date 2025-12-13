@@ -105,6 +105,5 @@ public class CarsBean {
         user.getCars().add(car);
         car.setOwner(user);
 
-        // Nu este nevoie de entityManager.persist/merge explicit, deoarece entitățile sunt managed (JPA detectează modificările automat la finalul tranzacției)
     }
 }

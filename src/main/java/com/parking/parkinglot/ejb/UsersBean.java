@@ -1,6 +1,7 @@
 package com.parking.parkinglot.ejb;
 
 import jakarta.ejb.EJBException;
+
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -38,4 +39,6 @@ public class UsersBean {
         }
         return userDtos;
     }
+
+
 }

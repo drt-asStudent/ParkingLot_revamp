@@ -19,7 +19,7 @@ public class CarDto {
         this.licensePlate = licensePlate;
         this.id = id;
         this.parkingSpot = parkingSpot;
-    }
+  }
 
     public Long getId() {
         return id;

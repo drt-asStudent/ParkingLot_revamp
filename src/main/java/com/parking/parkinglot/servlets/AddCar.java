@@ -19,6 +19,7 @@ import com.parking.parkinglot.ejb.CarsBean; // AM ADĂUGAT ACEST IMPORT
 import com.parking.parkinglot.ejb.UsersBean;
 
 @WebServlet(name = "AddCar", value = "/AddCar")
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"WRITE_CARS"}))
 public class AddCar extends HttpServlet {
 
     @Inject

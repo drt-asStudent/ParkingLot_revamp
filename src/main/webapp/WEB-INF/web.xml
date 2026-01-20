@@ -11,4 +11,17 @@
             <form-error-page>/Login</form-error-page>
         </form-login-config>
     </login-config>
+
+    <security-role>
+        <role-name>READ_CARS</role-name>
+    </security-role>
+    <security-role>
+        <role-name>WRITE_CARS</role-name>
+    </security-role>
+    <security-role>
+        <role-name>READ_USERS</role-name>
+    </security-role>
+    <security-role>
+        <role-name>WRITE_USERS</role-name>
+    </security-role>
 </web-app>

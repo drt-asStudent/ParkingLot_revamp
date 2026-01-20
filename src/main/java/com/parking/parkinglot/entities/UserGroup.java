@@ -6,17 +6,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "usergroups")
+@Table(name = "usergroup")
 public class UserGroup {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     @Column(name = "user_group")
     private String userGroup;
 
     @Column(name = "username")
     private String username;
-
-    @Id
-    @Column(nullable = false)
-    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)

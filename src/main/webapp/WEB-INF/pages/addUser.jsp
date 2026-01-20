@@ -6,11 +6,11 @@
 <t:pageTemplate pageTitle="Add User">
   <h1>Add User</h1>
 
-  <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/AddUser>
+  <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/AddUser">
 
-    <!-- 1. Username -->
+    <!-- 1.Username-->
     <div class="mb-3">
-      <label for="username" class="form-label">License Plate</label>
+      <label for="username" class="form-label">Nume utilizator</label>
       <input type="text" class="form-control" id="username" name="username" required>
       <div class="invalid-feedback">
         Username is required.
@@ -19,27 +19,27 @@
 
   <!-- 2. Email -->
   <div class="mb-3">
-    <label for="email" class="form-label">Parking Spot</label>
+    <label for="email" class="form-label">e-Mail</label>
     <input type="text" class="form-control" id="email" name="email" required>
     <div class="invalid-feedback">
-      Email Spot is required.
+      Email is required.
     </div>
   </div>
 
     <!-- 3. Password -->
     <div class="mb-3">
-      <label for="password" class="form-label">Parking Spot</label>
+      <label for="password" class="form-label">Parola</label>
       <input type="text" class="form-control" id="password" name="password" required>
       <div class="invalid-feedback">
-        Password Spot is required.
+        Password is required.
       </div>
     </div>
 
         <div class="mb-3">
           <label for="user_group" class="form-label">User Group</label>
-          <select class="form-select" id="user_group" name="user_groups" required>
+          <select class="form-select" id="user_group" name="user_group" required>
             <option value="">Choose...</option>
-            <c:forEach items="${userGroups}" var="userGroup">
+            <c:forEach items="${userGroup}" var="userGroup">
               <option value="${userGroup}">${userGroup}</option>
             </c:forEach>
           </select>

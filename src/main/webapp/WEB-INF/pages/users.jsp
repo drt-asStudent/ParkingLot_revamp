@@ -5,9 +5,19 @@
 <t:pageTemplate pageTitle="Users">
     <h1>Users</h1>
 
+    <!-- Formularul începe aici -->
+    <form method="POST" action="${pageContext.request.contextPath}/Users">
+
+        <!-- Buton ADD USER -->
+        <a href="${pageContext.request.contextPath}/AddUser"
+           class="btn btn-primary btn-lg mb-3">
+            Add User
+        </a>
+
     <div class="container text-center">
             <%-- Iterăm prin lista de useri --%>
         <c:forEach var="user" items="${users}">
+
             <div class="row">
                 <div class="col">
                         ${user.username}
@@ -16,6 +26,8 @@
                         ${user.email}
                 </div>
             </div>
+
         </c:forEach>
     </div>
 </t:pageTemplate>
+</form>

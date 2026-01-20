@@ -1,5 +1,6 @@
 package com.parking.parkinglot.servlets;
 
+import com.parking.parkinglot.ejb.PasswordBean;
 import com.parking.parkinglot.ejb.UsersBean;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
@@ -16,7 +17,7 @@ public class AddUser extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("userGroups", new String[] {"READ_CARS", "WRITE_CARS", "READ_USERS", "WRITE_USERS"});
+        request.setAttribute("userGroup", new String[] {"READ_CARS", "WRITE_CARS", "READ_USERS", "WRITE_USERS"});
         request.getRequestDispatcher("/WEB-INF/pages/addUser.jsp").forward(request, response);
     }
 
@@ -25,11 +26,18 @@ public class AddUser extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String[] userGroups = request.getParameterValues("user_groups");
-        if (userGroups == null) {
-            userGroups = new String[0];
+        String[] userGroup = request.getParameterValues("user_group");
+        if (userGroup == null) {
+            userGroup = new String[0];
         }
-        usersBean.createUser(username, email, password, Arrays.asList(userGroups));
-        response.sendRedirect(request.getContextPath() + "/Users");
+
+        try {
+            usersBean.createUser(username, email, password, Arrays.asList(userGroup));
+            response.sendRedirect(request.getContextPath() + "/Users");
+        } catch (Exception e) {
+            // This will help you see the error in the console if it fails
+            e.printStackTrace();
+            throw new ServletException("Error creating user", e);
+        }
     }
 }

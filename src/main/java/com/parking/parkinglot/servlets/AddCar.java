@@ -1,5 +1,6 @@
 package com.parking.parkinglot.servlets;
 
+import jakarta.annotation.security.DeclareRoles;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -18,8 +19,12 @@ import com.parking.parkinglot.common.UserDto;
 import com.parking.parkinglot.ejb.CarsBean; // AM ADĂUGAT ACEST IMPORT
 import com.parking.parkinglot.ejb.UsersBean;
 
+@DeclareRoles({"READ_CARS", "WRITE_CARS"})
+
 @WebServlet(name = "AddCar", value = "/AddCar")
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"WRITE_CARS"}))
+
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_CARS"}),
+        httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed = {"WRITE_CARS"})})
 public class AddCar extends HttpServlet {
 
     @Inject

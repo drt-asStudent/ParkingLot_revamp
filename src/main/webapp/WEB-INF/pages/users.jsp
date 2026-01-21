@@ -7,12 +7,13 @@
 
     <!-- Formularul începe aici -->
     <form method="POST" action="${pageContext.request.contextPath}/Users">
-
+    <c:if test="${pageContext.request.isUserInRole('WRITE_USERS')}">
         <!-- Buton ADD USER -->
         <a href="${pageContext.request.contextPath}/AddUser"
            class="btn btn-primary btn-lg mb-3">
             Add User
         </a>
+    </c:if>
 
     <div class="container text-center">
             <%-- Iterăm prin lista de useri --%>

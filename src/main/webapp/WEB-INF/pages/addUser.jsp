@@ -6,12 +6,12 @@
 <t:pageTemplate pageTitle="Add User">
   <h1>Add User</h1>
 
-  <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/AddUser">
+  <form autocomplete="off" class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/AddUser">
 
     <!-- 1.Username-->
     <div class="mb-3">
       <label for="username" class="form-label">Nume utilizator</label>
-      <input type="text" class="form-control" id="username" name="username" required>
+      <input type="text" class="form-control" id="username" name="username" required autocomplete="off">
       <div class="invalid-feedback">
         Username is required.
       </div>
@@ -20,7 +20,7 @@
   <!-- 2. Email -->
   <div class="mb-3">
     <label for="email" class="form-label">e-Mail</label>
-    <input type="text" class="form-control" id="email" name="email" required>
+    <input type="text" class="form-control" id="email" name="email" required autocomplete="off">
     <div class="invalid-feedback">
       Email is required.
     </div>
@@ -29,7 +29,7 @@
     <!-- 3. Password -->
     <div class="mb-3">
       <label for="password" class="form-label">Parola</label>
-      <input type="text" class="form-control" id="password" name="password" required>
+      <input type="password" class="form-control" id="password" name="password" required autocomplete="new-password">
       <div class="invalid-feedback">
         Password is required.
       </div>
@@ -54,5 +54,7 @@
   </form>
 
   <script src="${pageContext.request.contextPath}/scripts/form-validation.js"></script>
+
+
 
 </t:pageTemplate>

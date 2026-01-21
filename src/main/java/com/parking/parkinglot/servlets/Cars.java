@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList; // Import necesar
 
-//@DeclareRoles({"READ_CARS", "WRITE_CARS"})
-//@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_CARS"}), httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed = {"WRITE_CARS"})})
+@DeclareRoles({"READ_CARS", "WRITE_CARS"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_CARS"}), httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed = {"WRITE_CARS"})})
 @WebServlet(name = "Cars", value = "/Cars")
 public class Cars extends HttpServlet {
     @Inject

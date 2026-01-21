@@ -28,14 +28,14 @@
 
                     <!-- CARS -->
                     <li class="nav-item">
-
+<c:if test="${pageContext.request.isUserInRole('READ_CARS')}">
                         <a class="nav-link
                         ${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))
                            eq '/cars.jsp' ? ' active' : ''}"
                            aria-current="page" href="${pageContext.request.contextPath}/Cars">
                             Cars
                         </a>
-
+</c:if>
                     </li>
 
                     <!-- USERS (adăugat corect ca și Cars) -->
@@ -52,18 +52,27 @@
 
                     <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
                     <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">Disabled</a></li>
+                </ul>
 
-                    <c:choose>
-                        <c:when test="${pageContext.request.getRemoteUser() == null}">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/Login">Login</a>
-                        </c:when>
-                        <c:otherwise>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/Logout">Logout</a>
-                        </c:otherwise>
-                    </c:choose>
+
+                <ul class="navbar-nav d-flex">
+                    <li class="nav-item">
+
+
+                                <c:choose>
+                                    <c:when test="${pageContext.request.getRemoteUser() == null}">
+                                        <a class="nav-link" href="${pageContext.request.contextPath}/Login">Login</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="nav-link" href="${pageContext.request.contextPath}/Logout">Logout</a>
+                                    </c:otherwise>
+                                </c:choose>
+                    </li>
                 </ul>
 
             </div>
         </div>
+
+
     </nav>
 </header>

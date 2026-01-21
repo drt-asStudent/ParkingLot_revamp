@@ -1,5 +1,7 @@
 package com.parking.parkinglot.ejb;
 
+import com.parking.parkinglot.common.CarPhotoDto;
+import com.parking.parkinglot.entities.CarPhoto;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.EJBException;
 import jakarta.persistence.EntityManager;
@@ -13,7 +15,7 @@ import com.parking.parkinglot.entities.User;
 import java.util.logging.Logger;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collection; // Import necesar
+import java.util.Collection;
 
 @Stateless
 public class CarsBean {
@@ -61,7 +63,7 @@ public class CarsBean {
         entityManager.persist(car);
     }
 
-    public CarDto findById(Long carId) {
+    public CarDto findById(Integer carId) {
         LOG.info("findById");
 
         Car car = entityManager.find(Car.class, carId);
@@ -78,32 +80,57 @@ public class CarsBean {
         );
     }
 
-    // --- METODA NOUĂ PENTRU ȘTERGERE ---
-    public void deleteCarsByIds(Collection<Long> carIds) {
+    public void deleteCarsByIds(Collection<Integer> carIds) {
         LOG.info("deleteCarsByIds");
 
-        for (Long carId : carIds) {
+        for (Integer carId : carIds) {
             Car car = entityManager.find(Car.class, carId);
             if (car != null) {
                 entityManager.remove(car);
             }
         }
     }
-    public void updateCar(Long carId, String licensePlate, String parkingSpot, Long userId) {
+
+    public void updateCar(Integer carId, String licensePlate, String parkingSpot, Long userId) {
         LOG.info("updateCar");
 
         Car car = entityManager.find(Car.class, carId);
         car.setLicensePlate(licensePlate);
         car.setParkingSpot(parkingSpot);
 
-        // 1. Scoatem mașina de la vechiul proprietar
         User oldUser = car.getOwner();
         oldUser.getCars().remove(car);
 
-        // 2. Adăugăm mașina la noul proprietar
         User user = entityManager.find(User.class, userId);
         user.getCars().add(car);
         car.setOwner(user);
 
+    }
+
+    public void addPhotoToCar(Integer carId, String filename, String fileType, byte[] fileContent) {
+        LOG.info("addPhotoToCar");
+        CarPhoto photo = new CarPhoto();
+        photo.setFilename(filename);
+        photo.setFileType(fileType);
+        photo.setFileContent(fileContent);
+        Car car = entityManager.find(Car.class, carId);
+        if (car.getPhoto() != null) {
+            entityManager.remove(car.getPhoto());
+        }
+        car.setPhoto(photo);
+        photo.setCar(car);
+        entityManager.persist(photo);
+    }
+
+    public CarPhotoDto findPhotoByCarId(Integer carId) {
+        List<CarPhoto> photos = entityManager
+                .createQuery("SELECT p FROM CarPhoto p where p.car.id = :id", CarPhoto.class)
+                .setParameter("id", carId)
+                .getResultList();
+        if (photos.isEmpty()) {
+            return null;
+        }
+        CarPhoto photo = photos.get(0); // the first element
+        return new CarPhotoDto(photo.getId(), photo.getFilename(), photo.getFileType(), photo.getFileContent());
     }
 }

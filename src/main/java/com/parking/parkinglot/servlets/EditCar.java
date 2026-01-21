@@ -29,7 +29,7 @@ public class EditCar extends HttpServlet {
         request.setAttribute("users", users);
 
         // 2. Luăm ID-ul mașinii din URL (când dai click pe Edit, linkul este EditCar?id=...)
-        Long carId = Long.parseLong(request.getParameter("id"));
+        Integer carId = Integer.parseInt(request.getParameter("id"));
 
         // 3. Căutăm datele mașinii folosind metoda findById din CarsBean
         CarDto car = carsBean.findById(carId);
@@ -49,7 +49,7 @@ public class EditCar extends HttpServlet {
         Long userId = Long.parseLong(request.getParameter("owner_id"));
 
         // Aici folosim ID-ul ascuns (hidden input) din formular
-        Long carId = Long.parseLong(request.getParameter("car_id"));
+        Integer carId = Integer.parseInt(request.getParameter("car_id"));
 
         // 2. Apelăm EJB-ul pentru a face update în baza de date
         carsBean.updateCar(carId, licensePlate, parkingSpot, userId);

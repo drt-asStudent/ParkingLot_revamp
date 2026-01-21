@@ -8,6 +8,7 @@
         <class>com.parking.parkinglot.entities.User</class>
         <class>com.parking.parkinglot.entities.Car</class>
         <class>com.parking.parkinglot.entities.UserGroup</class>
+        <class>com.parking.parkinglot.entities.CarPhoto</class>
 
 
         <properties>

@@ -37,9 +37,9 @@ public class Cars extends HttpServlet {
 
         // 2. Dacă există selecții, le convertim și apelăm Bean-ul
         if (carIdsAsString != null) {
-            List<Long> carIds = new ArrayList<>();
+            List<Integer> carIds = new ArrayList<>();
             for (String carIdAsString : carIdsAsString) {
-                carIds.add(Long.parseLong(carIdAsString));
+                carIds.add(Integer.parseInt(carIdAsString));
             }
             carsBean.deleteCarsByIds(carIds);
         }

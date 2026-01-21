@@ -1,5 +1,6 @@
 package com.parking.parkinglot.servlets;
 
+import com.parking.parkinglot.ejb.InvoiceBean;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
@@ -9,6 +10,8 @@ import com.parking.parkinglot.common.UserDto;
 import com.parking.parkinglot.ejb.UsersBean;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 @DeclareRoles({"READ_USERS", "WRITE_USERS"})
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_USERS"}))
@@ -19,6 +22,8 @@ public class Users extends HttpServlet {
     @Inject
     UsersBean usersBean;
 
+    @Inject
+    InvoiceBean invoiceBean;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
@@ -32,6 +37,12 @@ public class Users extends HttpServlet {
         // 4. Setăm pagina activă pentru ca meniul să o evidențieze (vezi logica din menu.jsp)
         request.setAttribute("activePage", "Users");
 
+        //4,5
+        if(!invoiceBean.getUserIds().isEmpty()){
+            Collection<String> usernames = usersBean.findUsernamesByUserIds(invoiceBean.getUserIds());
+            request.setAttribute("invoices", usernames);
+        }
+
         // 5. Facem forward către pagina de afișare
         request.getRequestDispatcher("/WEB-INF/pages/users.jsp").forward(request, response);
     }
@@ -39,6 +50,14 @@ public class Users extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
-        // Nu este necesar cod aici pentru simpla afișare a userilor
+        String[] userIdsAsString = request.getParameterValues("user_ids");
+        if (userIdsAsString!=null){
+            List<Long> userIds = new ArrayList<>();
+            for(String userIdAsString : userIdsAsString){
+                userIds.add(Long.parseLong(userIdAsString));
+            }
+            invoiceBean.getUserIds().addAll(userIds);
+        }
+        response.sendRedirect(request.getContextPath() + "/Users");
     }
 }

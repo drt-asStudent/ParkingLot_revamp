@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<%-- PASUL A: Aici am adăugat linia pentru JSTL ca să putem folosi forEach --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:pageTemplate pageTitle="Add Car">

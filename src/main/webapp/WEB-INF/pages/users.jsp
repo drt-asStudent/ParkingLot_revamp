@@ -13,6 +13,9 @@
            class="btn btn-primary btn-lg mb-3">
             Add User
         </a>
+        <button type="submit" class="btn btn-secondary btn-lg mb-3">
+            Invoice
+        </button>
     </c:if>
 
     <div class="container text-center">
@@ -20,6 +23,9 @@
         <c:forEach var="user" items="${users}">
 
             <div class="row">
+                <div class="col">
+                    <input type="checkbox" name="user_ids" value="${user.id}">
+                </div>
                 <div class="col">
                         ${user.username}
                 </div>
@@ -32,3 +38,10 @@
     </div>
 </t:pageTemplate>
 </form>
+<c:if test="${not empty invoices}">
+    <h2>Invoices</h2>
+    <c:forEach var="username" items="${invoices}" varStatus="status">
+        ${status.index+1}.${username}
+        <br>
+    </c:forEach>
+</c:if>

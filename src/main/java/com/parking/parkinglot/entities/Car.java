@@ -8,7 +8,7 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "LICENSEPLATE")
     private String licensePlate;
@@ -20,6 +20,10 @@ public class Car {
     @JoinColumn(name = "OWNER_ID", nullable = false)
     private User owner;
 
+    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private CarPhoto photo;
+
+
     public User getOwner() {
         return owner;
     }
@@ -29,11 +33,11 @@ public class Car {
     }
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,5 +55,13 @@ public class Car {
 
     public void setParkingSpot(String parkingSpot) {
         this.parkingSpot = parkingSpot;
+    }
+
+    public CarPhoto getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(CarPhoto photo) {
+        this.photo = photo;
     }
 }

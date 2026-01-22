@@ -15,17 +15,6 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
-                    <!-- ABOUT -->
-                    <li class="nav-item">
-                        <a class="nav-link
-                           ${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))
-                           eq '/about.jsp' ? ' active' : ''}"
-                           aria-current="page"
-                           href="${pageContext.request.contextPath}/about.jsp">
-                            About
-                        </a>
-                    </li>
-
                     <!-- CARS -->
                     <li class="nav-item">
                         <c:if test="${pageContext.request.isUserInRole('READ_CARS')}">
@@ -50,10 +39,29 @@
                         </c:if>
                     </li>
 
-                    <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-                    <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">Disabled</a></li>
+                    <!-- ABOUT -->
+                    <li class="nav-item">
+                        <a class="nav-link
+                           ${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))
+                           eq '/about.jsp' ? ' active' : ''}"
+                           aria-current="page"
+                           href="${pageContext.request.contextPath}/about.jsp">
+                            About
+                        </a>
+                    </li>
+
                 </ul>
 
+                <!-- ABOUT -->
+                <li class="nav-item">
+                    <a class="nav-link
+                           ${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))
+                           eq '/about.jsp' ? ' active' : ''}"
+                       aria-current="page"
+                       href="${pageContext.request.contextPath}/about.jsp">
+                        About
+                    </a>
+                </li>
 
                 <ul class="navbar-nav d-flex">
                     <li class="nav-item">

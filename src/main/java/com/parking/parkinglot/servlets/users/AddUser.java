@@ -1,6 +1,5 @@
-package com.parking.parkinglot.servlets;
+package com.parking.parkinglot.servlets.users;
 
-import com.parking.parkinglot.ejb.PasswordBean;
 import com.parking.parkinglot.ejb.UsersBean;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;

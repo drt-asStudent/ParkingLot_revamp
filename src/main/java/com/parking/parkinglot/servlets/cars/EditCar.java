@@ -1,4 +1,4 @@
-package com.parking.parkinglot.servlets;
+package com.parking.parkinglot.servlets.cars;
 
 import java.io.IOException;
 import jakarta.inject.Inject;
@@ -10,7 +10,6 @@ import com.parking.parkinglot.common.UserDto;
 import com.parking.parkinglot.ejb.CarsBean;
 import com.parking.parkinglot.ejb.UsersBean;
 
-import java.io.IOException;
 import java.util.List;
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"WRITE_CARS"}))
 @WebServlet(name = "EditCar", value = "/EditCar")
@@ -46,7 +45,7 @@ public class EditCar extends HttpServlet {
         // 1. Preluăm datele din formular
         String licensePlate = request.getParameter("license_plate");
         String parkingSpot = request.getParameter("parking_spot");
-        Long userId = Long.parseLong(request.getParameter("owner_id"));
+        Integer userId = Integer.parseInt(request.getParameter("owner_id"));
 
         // Aici folosim ID-ul ascuns (hidden input) din formular
         Integer carId = Integer.parseInt(request.getParameter("car_id"));

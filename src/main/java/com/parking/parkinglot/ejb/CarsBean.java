@@ -91,7 +91,7 @@ public class CarsBean {
         }
     }
 
-    public void updateCar(Integer carId, String licensePlate, String parkingSpot, Integer userId) {
+    public void updateCar(Integer carId, String licensePlate, String parkingSpot, Long userId) {
         LOG.info("updateCar");
 
         Car car = entityManager.find(Car.class, carId);

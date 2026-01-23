@@ -45,7 +45,7 @@ public class EditCar extends HttpServlet {
         // 1. Preluăm datele din formular
         String licensePlate = request.getParameter("license_plate");
         String parkingSpot = request.getParameter("parking_spot");
-        Integer userId = Integer.parseInt(request.getParameter("owner_id"));
+        Long userId = Long.parseLong(request.getParameter("owner_id"));
 
         // Aici folosim ID-ul ascuns (hidden input) din formular
         Integer carId = Integer.parseInt(request.getParameter("car_id"));

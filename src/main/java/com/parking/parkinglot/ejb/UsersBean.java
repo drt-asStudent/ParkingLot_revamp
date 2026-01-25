@@ -13,7 +13,9 @@ import com.parking.parkinglot.entities.UserGroup;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 @Stateless
@@ -38,8 +40,27 @@ public class UsersBean {
 
     private List<UserDto> copyUsersToDto(List<User> users) {
         List<UserDto> userDtos = new ArrayList<>();
+        List<String> usernames = new ArrayList<>();
         for (User user : users) {
-            UserDto dto = new UserDto(user.getId(), user.getUsername(), user.getEmail());
+            usernames.add(user.getUsername());
+        }
+
+        Map<String, List<String>> groupsByUsername = new HashMap<>();
+        if (!usernames.isEmpty()) {
+            List<UserGroup> userGroups = entityManager
+                    .createQuery("SELECT ug FROM UserGroup ug WHERE ug.username IN :usernames", UserGroup.class)
+                    .setParameter("usernames", usernames)
+                    .getResultList();
+            for (UserGroup userGroup : userGroups) {
+                groupsByUsername
+                        .computeIfAbsent(userGroup.getUsername(), key -> new ArrayList<>())
+                        .add(userGroup.getUserGroup());
+            }
+        }
+
+        for (User user : users) {
+            List<String> groups = groupsByUsername.getOrDefault(user.getUsername(), new ArrayList<>());
+            UserDto dto = new UserDto(user.getId(), user.getUsername(), user.getEmail(), groups);
             userDtos.add(dto);
         }
         return userDtos;
@@ -69,5 +90,13 @@ public class UsersBean {
     List<String> usernames =
             entityManager.createQuery("SELECT u.username FROM User u WHERE u.id IN :userIds", String.class).setParameter("userIds", userIds).getResultList();
         return usernames;
+    }
+
+    public List<UserDto> findUsersByUserIds(Collection<Long> userIds) {
+        List<User> users =
+                entityManager.createQuery("SELECT u FROM User u WHERE u.id IN :userIds", User.class)
+                        .setParameter("userIds", userIds)
+                        .getResultList();
+        return copyUsersToDto(users);
     }
 }

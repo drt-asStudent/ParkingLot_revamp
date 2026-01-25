@@ -32,16 +32,44 @@
                 <div class="col">
                         ${user.email}
                 </div>
+                <div class="col">
+                    <c:forEach var="group" items="${user.userGroups}" varStatus="status">
+                        <c:if test="${!status.first}">, </c:if>${group}
+                    </c:forEach>
+                </div>
             </div>
 
         </c:forEach>
     </div>
+    <hr>
+    <div>
+    <c:if test="${not empty invoices}">
+        <h2>Invoices</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Groups</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="invoiceUser" items="${invoices}" varStatus="status">
+                    <tr>
+                        <td>${status.index+1}</td>
+                        <td>${invoiceUser.username}</td>
+                        <td>${invoiceUser.email}</td>
+                        <td>
+                            <c:forEach var="group" items="${invoiceUser.userGroups}" varStatus="status">
+                                <c:if test="${!status.first}">, </c:if>${group}
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
+    </div>
 </t:pageTemplate>
 </form>
-<c:if test="${not empty invoices}">
-    <h2>Invoices</h2>
-    <c:forEach var="username" items="${invoices}" varStatus="status">
-        ${status.index+1}.${username}
-        <br>
-    </c:forEach>
-</c:if>

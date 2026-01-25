@@ -8,14 +8,16 @@
     <!-- Formularul începe aici -->
     <form method="POST" action="${pageContext.request.contextPath}/Cars">
 
-        <!-- Buton ADD CAR -->
-        <a href="${pageContext.request.contextPath}/AddCar"
-           class="btn btn-primary btn-lg mb-3">
-            Add Car
-        </a>
+        <c:if test="${pageContext.request.isUserInRole('WRITE_CARS')}">
+            <!-- Buton ADD CAR -->
+            <a href="${pageContext.request.contextPath}/AddCar"
+               class="btn btn-primary btn-lg mb-3">
+                Add Car
+            </a>
 
-        <!-- Buton DELETE CARS -->
-        <button class="btn btn-danger mb-3" type="submit">Delete Cars</button>
+            <!-- Buton DELETE CARS -->
+            <button class="btn btn-danger mb-3" type="submit">Delete Cars</button>
+        </c:if>
 
         <div class="container text-center">
             <c:forEach var="car" items="${cars}">

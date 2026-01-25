@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 @DeclareRoles({"READ_USERS", "WRITE_USERS"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_USERS"}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_USERS", "WRITE_USERS"}))
 @WebServlet(name = "Users", value = "/Users")
 public class Users extends HttpServlet {
 
@@ -39,8 +39,8 @@ public class Users extends HttpServlet {
 
         //4,5
         if(!invoiceBean.getUserIds().isEmpty()){
-            Collection<String> usernames = usersBean.findUsernamesByUserIds(invoiceBean.getUserIds());
-            request.setAttribute("invoices", usernames);
+            List<UserDto> invoiceUsers = usersBean.findUsersByUserIds(invoiceBean.getUserIds());
+            request.setAttribute("invoices", invoiceUsers);
         }
 
         // 5. Facem forward către pagina de afișare

@@ -17,7 +17,7 @@
 
                     <!-- CARS -->
                     <li class="nav-item">
-                        <c:if test="${pageContext.request.isUserInRole('READ_CARS')}">
+                        <c:if test="${pageContext.request.isUserInRole('READ_CARS') || pageContext.request.isUserInRole('WRITE_CARS')}">
                         <a class="nav-link
                         ${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))
                            eq '/cars.jsp' ? ' active' : ''}"
@@ -29,7 +29,7 @@
 
                     <!-- USERS (adăugat corect ca și Cars) -->
                     <li class="nav-item">
-                        <c:if test="${pageContext.request.isUserInRole('READ_USERS')}">
+                        <c:if test="${pageContext.request.isUserInRole('READ_USERS') || pageContext.request.isUserInRole('WRITE_USERS')}">
                         <a class="nav-link
                         ${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))
                            eq '/users.jsp' ? ' active' : ''}"

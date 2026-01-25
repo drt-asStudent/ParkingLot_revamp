@@ -20,7 +20,7 @@
   <!-- 2. Email -->
   <div class="mb-3">
     <label for="email" class="form-label">e-Mail</label>
-    <input type="text" class="form-control" id="email" name="email" required autocomplete="off">
+    <input type="email" class="form-control" id="email" name="email" required autocomplete="off">
     <div class="invalid-feedback">
       Email is required.
     </div>
@@ -36,12 +36,13 @@
     </div>
 
         <div class="mb-3">
-          <label for="user_group" class="form-label">User Group</label>
-          <select class="form-select" id="user_group" name="user_group" required>
-            <option value="">Choose...</option>
-            <c:forEach items="${userGroup}" var="userGroup">
+          <label for="user_group" class="form-label">Groups</label>
+          <select class="custom-select d-block w-100" id="user_group" name="user_group" multiple>
+
+            <c:forEach items="${userGroup}" var="userGroup" varStatus="status">
               <option value="${userGroup}">${userGroup}</option>
             </c:forEach>
+
           </select>
           <div class="invalid-feedback">
             Please select a user group.

@@ -22,7 +22,4 @@ public class InvoiceBean implements Serializable{
         this.userIds = userIds;
     }
 
-
-
-
 }
